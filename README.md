@@ -2,6 +2,10 @@
 
 npm install -g expo-cli
 
+## install packages
+
+npm i
+
 ## run on ios/android simulator
 
 npm start
