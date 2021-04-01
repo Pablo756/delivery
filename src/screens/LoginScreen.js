@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, Keyboard } from 'react-native';
-import {DismissKeyboardHOC} from '../components/DismissKeyboardHOC';
+
+import { DismissKeyboardHOC } from '../components/DismissKeyboardHOC';
+
 import clients from '../constants/clients';
-import {windowWidth} from '../utils/Dimensions';
+import  {windowWidth } from '../utils/Dimensions';
 
 const DismissableView = DismissKeyboardHOC(View);
 
@@ -11,12 +13,14 @@ export const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const check = () => {
+  const onSubmit = () => {
     Keyboard.dismiss();
     clients.some((client) => client.login === login && client.password === password)
       ? navigation.navigate(
-      'OrderList',
-      {id: clients[clients.findIndex((client) => client.login === login)].id}
+        'OrderList',
+        {id: clients[clients.findIndex((client) => client.login === login &&
+          client.password === password)].id
+        }
       )
       : setError('Неверный логин/пароль!')
   };
@@ -33,7 +37,7 @@ export const LoginScreen = ({ navigation }) => {
           multiline={false}
           style={styles.textInput}
           placeholder="Логин"
-          placeholderTextColor="#000"
+          placeholderTextColor="#1C1C1C"
           onChangeText={(login) => {setLogin(login); setError('')}}
           blurOnSubmit={true}
         />
@@ -47,7 +51,7 @@ export const LoginScreen = ({ navigation }) => {
           autoCorrect={false}
           style={styles.textInput}
           placeholder="Пароль"
-          placeholderTextColor="#000"
+          placeholderTextColor="#1C1C1C"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
           blurOnSubmit={true}
@@ -56,7 +60,7 @@ export const LoginScreen = ({ navigation }) => {
       <View style={styles.errorContainer}>
         <Text style={styles.errorText}>{error}</Text>
       </View>
-      <TouchableOpacity onPress={check} style={styles.button}>
+      <TouchableOpacity onPress={onSubmit} style={styles.button}>
         <Text style={styles.buttonTitle}>ВОЙТИ</Text>
       </TouchableOpacity>
     </DismissableView>
@@ -73,7 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 0.05 * windowWidth,
   },
   title: {
-    color: '#000',
     fontSize: 0.07 * windowWidth,
     fontWeight: 'bold',
     marginBottom: 0.12 * windowWidth,
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   container: {
+    backgroundColor: '#fff',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'

@@ -1,40 +1,12 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
 
-import {DetailsScreen} from './src/screens/DetailsScreen';
-import {OrderListScreen} from './src/screens/OrderListScreen';
-import {LoginScreen} from './src/screens/LoginScreen';
+import { Routes } from './src/navigation/Routes';
+import { OrderProvider } from './src/context/OrderContext';
 
-const Stack = createStackNavigator();
-
-function App() {
+export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login" component={LoginScreen}
-          options={{
-            gestureEnabled: false,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="OrderList" component={OrderListScreen}
-          options={{
-            gestureEnabled: false,
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Details" component={DetailsScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <OrderProvider>
+      <Routes />
+    </OrderProvider>
   );
 }
-
-export default App;
