@@ -39,7 +39,6 @@ export const LoginScreen = ({ navigation }) => {
           placeholder="Логин"
           placeholderTextColor="#1C1C1C"
           onChangeText={(login) => {setLogin(login); setError('')}}
-          blurOnSubmit={true}
         />
       </View>
       <View style={styles.textInputContainer}>
@@ -54,7 +53,6 @@ export const LoginScreen = ({ navigation }) => {
           placeholderTextColor="#1C1C1C"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
-          blurOnSubmit={true}
         />
       </View>
       <View style={styles.errorContainer}>
